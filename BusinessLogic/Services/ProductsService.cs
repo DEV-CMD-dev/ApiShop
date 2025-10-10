@@ -59,13 +59,16 @@ namespace BusinessLogic.Services
             return mapper.Map<ProductDto>(item);
         }
 
-        public IList<ProductDto> GetAll(int? filterCategoryId)
+        public IList<ProductDto> GetAll(int? filterCategoryId, string? searchTitle)
         {
             IQueryable<Product> query = ctx.Products
                 .Include(x => x.Category);
 
             if(filterCategoryId != null)
                 query = query.Where(x => x.CategoryId == filterCategoryId);
+
+            if (searchTitle != null)
+                query = query.Where(x => x.Title.ToLower().Contains(searchTitle.ToLower()));
 
             return mapper.Map<IList<ProductDto>>(query.ToList());
         }
