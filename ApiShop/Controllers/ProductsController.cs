@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Interfaces;
 
-namespace Shop_Api_PV421.Controllers
+namespace ApiShop.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

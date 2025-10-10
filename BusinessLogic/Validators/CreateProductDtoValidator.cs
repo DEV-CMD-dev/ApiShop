@@ -14,8 +14,7 @@ namespace BusinessLogic.Validators
         {
             RuleFor(x => x.Title)
               .NotEmpty()
-              .MinimumLength(3)
-              .Matches("^[A-Z].*").WithMessage("{PropertyName} must starts with uppercase letter.");
+              .MinimumLength(3);
 
             RuleFor(x => x.Discount)
                 .InclusiveBetween(0, 100);

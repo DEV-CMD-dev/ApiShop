@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using BusinessLogic.Helpers;
 using BusinessLogic.Interfaces;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
@@ -21,6 +22,7 @@ namespace BusinessLogic.Services
         public ProductDto Create(CreateProductDto model)
         {
             var entity = mapper.Map<Product>(model);
+            entity.Title = TextFromatter.CapitalizeFirstLetter(entity.Title);
 
             ctx.Products.Add(entity);
             ctx.SaveChanges();

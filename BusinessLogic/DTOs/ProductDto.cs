@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using System.ComponentModel.DataAnnotations;
-using DataAccess.Data.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BusinessLogic.DTOs
 {
@@ -9,7 +7,6 @@ namespace BusinessLogic.DTOs
         public int Id { get; set; }
 
         [Required, MinLength(3, ErrorMessage = "Title must has at least 3 characters.")]
-        [RegularExpression(@"^[A-Z].*", ErrorMessage = "Title must start with a capital letter.")]
         public string Title { get; set; }
         public string? ImageUrl { get; set; }
         public decimal Price { get; set; }
