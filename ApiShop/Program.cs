@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
+using ApiShop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,8 @@ builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICategoriesService, CategoryService>();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
