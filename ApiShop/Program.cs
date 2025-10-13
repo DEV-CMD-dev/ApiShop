@@ -1,16 +1,25 @@
+using ApiShop;
 using BusinessLogic.Configurations;
-using DataAccess.Data;
-using Microsoft.EntityFrameworkCore;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
-using ApiShop;
+using DataAccess.Data;
+using DataAccess.Data.Entities;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 string connStr = builder.Configuration.GetConnectionString("RemoteDb")
     ?? throw new Exception("No Connection String found.");
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+    options.SignIn.RequireConfirmedAccount = false)
+        .AddDefaultTokenProviders()
+        .AddEntityFrameworkStores<ShopDbContext>();
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -29,6 +38,7 @@ builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssembli
 
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICategoriesService, CategoryService>();
+builder.Services.AddScoped<IAccountsService, AccountsService>();
 
 var app = builder.Build();
 
