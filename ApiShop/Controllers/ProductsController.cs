@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLogic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiShop.Controllers
 {
@@ -21,6 +22,7 @@ namespace ApiShop.Controllers
             return Ok(productsService.GetAll(filterCategoryId, searchTitle));
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Get(int id)
         {
