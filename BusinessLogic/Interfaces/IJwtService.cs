@@ -7,5 +7,6 @@ namespace BusinessLogic.Interfaces
     {
         IEnumerable<Claim> GetClaims(User user);
         string GenerateToken(IEnumerable<Claim> claims);
+        string GeneratePasswordResetToken(User user);
     }
 }
